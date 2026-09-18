@@ -10,6 +10,11 @@
 <div class="app">
 
   <div id="titlebar" class="titlebar">
+    <div class="titlebar-brand">
+      <img src="icon.png" alt="" class="titlebar-icon">
+      <span class="titlebar-title">Descargador YT</span>
+    </div>
+
     <div class="titlebar-drag"></div>
 
     <div class="titlebar-controls">
@@ -76,6 +81,8 @@
     </div>
   </div>
 
+  <div id="settingsOverlay" class="settings-overlay hidden"></div>
+
   <main>
 
     <section class="card hero">
@@ -110,10 +117,6 @@
 
     <section id="queueSection" class="card queue hidden">
       <div class="queue-toolbar-top">
-        <span id="autoBestHintText" class="queue-hint">
-          Elegir <b>mejor calidad</b>, luego <b>Descargar</b> y guardar en
-          <button id="queueFolderBtn" class="link-btn">C:\Files</button>
-        </span>
         <label class="switch" title="Descarga automática con la mejor calidad">
           <input type="checkbox" id="autoBest" checked>
           <span class="slider"></span>
@@ -124,7 +127,6 @@
       <div id="queueList" class="queue-list"></div>
 
       <div class="queue-toolbar-bottom">
-        <button id="queueOptionsBtn" class="ghost-btn">⚙ <span id="queueOptionsText">Opciones</span></button>
         <span id="queueSpeedText" class="queue-speed">—</span>
         <button id="queuePauseAllBtn" class="ghost-btn">Pausar todos</button>
       </div>

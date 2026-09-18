@@ -1,6 +1,6 @@
 {
   "name": "descargador-videos-online-yt",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Descargador Videos Online YT para Windows",
   "main": "src/main.js",
   "scripts": {

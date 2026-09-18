@@ -73,8 +73,6 @@ const I18N={
   menuArchivo:"Archivo",
   menuDescargas:"Descargas",
   menuAyuda:"Ayuda",
-  autoBestHint:f=>`Elegir <b>mejor calidad</b>, luego <b>Descargar</b> y guardar en`,
-  queueOptions:"Opciones",
   queuePauseAll:"Pausar todos",
   queueResumeAll:"Reanudar todos",
   queueSpeedIdle:"Sin actividad",
@@ -192,8 +190,6 @@ const I18N={
   menuArchivo:"File",
   menuDescargas:"Downloads",
   menuAyuda:"Help",
-  autoBestHint:f=>`Choose <b>best quality</b>, then <b>Download</b> and save to`,
-  queueOptions:"Options",
   queuePauseAll:"Pause all",
   queueResumeAll:"Resume all",
   queueSpeedIdle:"No activity",
@@ -300,9 +296,6 @@ function applyLanguage(){
  $("langEs").classList.toggle("active",lang==="es");
  $("langEn").classList.toggle("active",lang==="en");
 
- $("autoBestHintText").innerHTML=t("autoBestHint")()+' <button id="queueFolderBtn" class="link-btn">'+(folder||t("folderNone"))+"</button>";
- $("queueFolderBtn").onclick=chooseFolderFlow;
- $("queueOptionsText").textContent=t("queueOptions");
  $("queuePauseAllBtn").textContent=paused?t("queueResumeAll"):t("queuePauseAll");
  if(!activeJobId) $("queueSpeedText").textContent=t("queueSpeedIdle");
 
@@ -335,9 +328,16 @@ $("langEn").onclick=()=>{lang="en";localStorage.setItem("app_lang",lang);applyLa
 $("themeOriginal").onclick=()=>{theme="dark";localStorage.setItem("app_theme",theme);applyTheme()};
 $("themeLight").onclick=()=>{theme="light";localStorage.setItem("app_theme",theme);applyTheme()};
 
-$("settingsBtn").onclick=e=>{e.stopPropagation();$("settingsPanel").classList.toggle("hidden")};
+function toggleSettingsPanel(show){
+ const panel=$("settingsPanel");
+ const isOpen=show!==undefined?show:panel.classList.contains("hidden");
+ panel.classList.toggle("hidden",!isOpen);
+ $("settingsOverlay").classList.toggle("hidden",!isOpen);
+}
+$("settingsBtn").onclick=e=>{e.stopPropagation();toggleSettingsPanel()};
+$("settingsOverlay").onclick=()=>toggleSettingsPanel(false);
 document.addEventListener("click",e=>{
- if(!$("settingsPanel").classList.contains("hidden") && !$("settingsPanel").contains(e.target) && e.target!==$("settingsBtn")) $("settingsPanel").classList.add("hidden");
+ if(!$("settingsPanel").classList.contains("hidden") && !$("settingsPanel").contains(e.target) && e.target!==$("settingsBtn")) toggleSettingsPanel(false);
 });
 
 function valid(u){try{let x=new URL(u);return x.hostname.includes("youtube.com")||x.hostname.includes("youtu.be")}catch{return false}}
@@ -428,8 +428,6 @@ $("analyze").onclick=async()=>{
  }catch(e){$("status").textContent=friendlyError(e)}
 };
 
-$("queueOptionsBtn").onclick=e=>{e.stopPropagation();$("settingsPanel").classList.toggle("hidden")};
-
 /* ===================== Cola de descargas ===================== */
 
 function addToQueue(item){
@@ -459,6 +457,7 @@ function qiMetaLine(item){
 
 function renderQueue(){
  $("queueSection").classList.toggle("hidden", queue.length===0);
+ if(queue.some(i=>i.status==="downloading")) toggleSettingsPanel(false);
  const list=$("queueList");
  list.innerHTML="";
  queue.forEach(item=>{
@@ -765,7 +764,7 @@ window.desktopAPI.onAppUpdateStatus(s=>{
 });
 
 /* ===================== Ayuda: aviso de Windows SmartScreen ===================== */
-$("helpSmartscreen").onclick=()=>{$("settingsPanel").classList.add("hidden");$("smartscreenOverlay").classList.remove("hidden")};
+$("helpSmartscreen").onclick=()=>{toggleSettingsPanel(false);$("smartscreenOverlay").classList.remove("hidden")};
 $("smartscreenClose").onclick=()=>$("smartscreenOverlay").classList.add("hidden");
 $("smartscreenOverlay").onclick=e=>{if(e.target===$("smartscreenOverlay"))$("smartscreenOverlay").classList.add("hidden")};
 

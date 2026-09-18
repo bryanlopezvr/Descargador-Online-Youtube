@@ -50,6 +50,7 @@ body{
 /* Barra de titulo personalizada (ventana sin marco nativo) */
 .titlebar{
   position:relative;
+  z-index:60;
   height:38px;
   display:flex;align-items:stretch;justify-content:flex-end;
   border-bottom:1px solid var(--border-soft);
@@ -66,6 +67,19 @@ body{
   display:flex;align-items:center;gap:8px;
   padding:0 8px;
   -webkit-app-region:no-drag;
+}
+
+.titlebar-brand{
+  display:flex;align-items:center;gap:7px;
+  padding-left:12px;
+  -webkit-app-region:drag;
+}
+.titlebar-icon{width:18px;height:18px;border-radius:5px;display:block}
+.titlebar-title{
+  font-size:12.5px;font-weight:600;
+  color:var(--text-dim);
+  white-space:nowrap;
+  letter-spacing:.1px;
 }
 
 .settings-btn{
@@ -94,6 +108,12 @@ body{
 .win-btn line{stroke:currentColor}
 .win-btn:hover{background:var(--surface-2);color:var(--text)}
 .win-btn-close:hover{background:var(--accent);color:#fff}
+
+.settings-overlay{
+  position:fixed;inset:0;z-index:49;
+  background:rgba(0,0,0,.35);
+  -webkit-app-region:no-drag;
+}
 
 .settings-panel{
   position:absolute;top:calc(100% + 8px);right:12px;
@@ -351,7 +371,7 @@ select:focus{border-color:var(--accent)}
 .queue{padding:14px 16px}
 
 .queue-toolbar-top{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  display:flex;align-items:center;justify-content:flex-end;gap:12px;
   padding:2px 4px 12px;border-bottom:1px solid var(--border-soft);margin-bottom:10px;
 }
 .queue-hint{font-size:11px;color:var(--text-dim);line-height:1.5}
