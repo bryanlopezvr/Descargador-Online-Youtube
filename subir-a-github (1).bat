@@ -53,8 +53,27 @@ git add .
 git commit -m "%COMMIT_MSG%"
 
 echo.
-echo === Subiendo a GitHub ===
-git push -u origin main
+echo === Sincronizando con GitHub ===
+git pull origin main --allow-unrelated-histories --no-edit
+if errorlevel 1 (
+    echo.
+    echo No se pudo combinar automaticamente con lo que hay en GitHub.
+    set /p FORCE=Quieres reemplazar lo de GitHub con tu version local? (S/N): 
+    if /i "%FORCE%"=="S" (
+        echo.
+        echo === Forzando subida ===
+        git push -u origin main --force
+    ) else (
+        echo.
+        echo Cancelado. Resuelve los conflictos manualmente y vuelve a correr el .bat.
+        pause
+        exit /b 1
+    )
+) else (
+    echo.
+    echo === Subiendo a GitHub ===
+    git push -u origin main
+)
 
 echo.
 echo === Listo ===
