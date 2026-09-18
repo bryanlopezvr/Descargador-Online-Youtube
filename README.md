@@ -4,160 +4,99 @@
 
 <h1 align="center">Descargador Videos Online YT</h1>
 
-<p align="center"><strong>Descarga, convierte y gestiona contenido de YouTube desde Windows con una interfaz moderna, rápida y sencilla.</strong></p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Windows-Electron-47848F?style=for-the-badge&logo=electron&logoColor=white">
-  <img src="https://img.shields.io/badge/yt--dlp-powered-FF0000?style=for-the-badge">
-  <img src="https://img.shields.io/badge/FFmpeg-enabled-007808?style=for-the-badge&logo=ffmpeg&logoColor=white">
-</p>
+<p align="center"><strong>Descarga tus videos y audios favoritos de YouTube de forma sencilla, rápida y organizada.</strong></p>
 
 ---
 
-## ✨ ¿Qué es?
+## ✨ Descubre la aplicación
 
-**Descargador Videos Online YT** es una aplicación de escritorio para Windows desarrollada con **Electron**. Está pensada para ofrecer una experiencia sencilla para analizar enlaces de YouTube, seleccionar formato y calidad, gestionar varias descargas y convertir contenido multimedia.
+**Descargador Videos Online YT** es una herramienta para Windows creada para facilitar la descarga y gestión de contenido de YouTube desde una interfaz sencilla y moderna.
 
-El proyecto utiliza **yt-dlp** como motor de extracción y descarga y **FFmpeg** para combinar streams de video/audio y realizar conversiones a MP3.
+Pega un enlace, revisa la información del contenido, elige cómo quieres descargarlo y deja que la aplicación se encargue del proceso.
 
-> **Uso responsable:** descarga únicamente contenido que tengas derecho a utilizar y respeta los derechos de autor, las leyes aplicables y las condiciones de uso de las plataformas.
+> ⚠️ **Uso responsable:** descarga únicamente contenido que tengas derecho a utilizar. Respeta los derechos de autor, las leyes aplicables y las condiciones de uso de las plataformas.
 
 ## 🚀 Características
 
-- 🎬 Descarga de videos en **MP4**.
-- 🎵 Descarga y conversión de audio a **MP3**.
-- 🖥️ Selección de calidad y formato.
-- 📋 Detección de enlaces de YouTube desde el portapapeles.
-- 🔗 Compatibilidad con videos, Shorts y enlaces abreviados de YouTube.
-- 📑 Soporte para **playlists** y selección de elementos.
-- 📥 **Cola de descargas** para gestionar varios contenidos.
-- 📊 Progreso, velocidad y estado de las descargas.
-- ⏹️ Cancelación de descargas en curso.
-- 🔄 Reintento de descargas que hayan fallado.
-- 🕘 Historial de descargas almacenado localmente.
-- ⚡ Actualización de **yt-dlp**.
-- 🔄 Actualizaciones automáticas de la aplicación mediante **GitHub Releases**.
-- 🌙 Temas de interfaz.
-- 🌎 Interfaz preparada para español e inglés.
-- 🪟 Instalador nativo para Windows.
+- 🎬 **Descarga videos en MP4**
+- 🎵 **Descarga audio en MP3**
+- 🖥️ **Elige la calidad y el formato**
+- 📋 **Detecta enlaces copiados** automáticamente
+- 🔗 Compatible con **videos, Shorts y enlaces de YouTube**
+- 📑 **Descarga playlists**
+- ☑️ Selecciona los videos que quieres descargar de una playlist
+- 📥 **Cola de descargas** para gestionar varios archivos
+- 📊 Visualiza **progreso, velocidad y estado** de cada descarga
+- ⏹️ **Cancela** una descarga cuando quieras
+- 🔄 **Reintenta** descargas que hayan presentado algún problema
+- 🕘 Consulta tu **historial de descargas**
+- 📂 Accede fácilmente a tus archivos descargados
+- 🌙 Disfruta de diferentes **opciones de apariencia**
+- 🌎 Disponible en **español e inglés**
+- 🔄 Recibe **actualizaciones automáticas** de la aplicación
 
-## 🧩 Flujo de trabajo
+## 🎥 Videos
 
-**Enlace de YouTube → análisis → selección de formato/calidad → yt-dlp → FFmpeg → archivo final**
+Puedes pegar el enlace de un video de YouTube y consultar su información antes de descargarlo.
 
-Cuando video y audio están disponibles por separado, FFmpeg puede encargarse de combinarlos. Para MP3, FFmpeg realiza el procesamiento y conversión del audio.
+La aplicación permite seleccionar entre las calidades disponibles y elegir el formato que necesitas.
 
-## 🛠️ Tecnologías
+## 🎵 Audio MP3
 
-| Tecnología | Función |
-|---|---|
-| **Electron** | Aplicación de escritorio |
-| **HTML / CSS / JavaScript** | Interfaz y lógica |
-| **yt-dlp** | Extracción y descarga |
-| **FFmpeg** | Procesamiento multimedia |
-| **electron-builder** | Generación del instalador |
-| **electron-updater** | Actualizaciones automáticas |
-| **GitHub Actions** | Automatización de builds y releases |
+Si únicamente quieres el audio, puedes descargarlo en **MP3** y seleccionar la calidad disponible.
 
-## 📦 Instalación para desarrollo
+Ideal para guardar contenido de audio compatible con tus necesidades.
 
-Requisitos:
+## 📑 Playlists
+
+También puedes trabajar con playlists.
+
+La aplicación muestra los contenidos disponibles para que puedas seleccionar qué elementos deseas descargar, en lugar de tener que procesarlos uno por uno.
+
+## 📥 Cola de descargas
+
+Organiza varias descargas en una misma cola.
+
+Puedes consultar el estado de cada elemento, ver el progreso, cancelar procesos y volver a intentar aquellos que hayan presentado un error.
+
+## 🕘 Historial
+
+La aplicación conserva un historial de tus descargas para que puedas consultar rápidamente los archivos procesados anteriormente.
+
+## 🔄 Actualizaciones
+
+La aplicación puede comprobar nuevas versiones y ofrecer actualizaciones para mantenerla al día con las mejoras y correcciones publicadas.
+
+## 💻 Requisitos
 
 - Windows
-- Node.js + npm
-- Git
+- Conexión a Internet para analizar y descargar contenido online.
+- Espacio disponible para guardar los archivos.
 
-Clona el proyecto:
+## ❓ Preguntas frecuentes
 
-```bash
-git clone https://github.com/bryanlopezvr/Descargador-Online-Youtube.git
-cd Descargador-Online-Youtube
-```
+### ¿Puedo descargar un video en diferentes calidades?
+Sí. Las opciones disponibles dependen del contenido que ofrezca YouTube.
 
-Instala las dependencias:
+### ¿Puedo descargar solamente el audio?
+Sí. Puedes utilizar la opción de descarga en MP3.
 
-```bash
-npm install
-```
+### ¿Puedo descargar una playlist?
+Sí. La aplicación permite analizar playlists y seleccionar los contenidos que deseas descargar.
 
-Ejecuta la aplicación:
+### ¿Puedo cancelar una descarga?
+Sí. Las descargas en curso pueden cancelarse desde la cola.
 
-```bash
-npm start
-```
-
-## 🏗️ Generar el instalador
-
-```bash
-npm run dist
-```
-
-El instalador se genera en:
-
-```text
-dist/
-```
-
-El proyecto utiliza `build/icon.ico` como icono del instalador y de la aplicación.
-
-## 🔄 Publicar una nueva versión
-
-El proyecto está preparado para generar releases mediante GitHub Actions.
-
-1. Actualiza la versión en `package.json`.
-2. Haz commit y push a `main`.
-3. Crea un tag con el mismo número usando el prefijo `v`.
-4. Sube el tag a GitHub.
-
-Ejemplo:
-
-```bash
-git add .
-git commit -m "Version 2.2.0"
-git push
-
-git tag v2.2.0
-git push origin v2.2.0
-```
-
-El workflow de `.github/workflows/build.yml` se encarga de compilar el instalador de Windows y publicarlo como GitHub Release junto con los archivos necesarios para `electron-updater`.
-
-## 📁 Estructura
-
-```text
-Descargador-Online-Youtube/
-├── .github/
-│   └── workflows/
-│       └── build.yml
-├── build/
-│   └── icon.ico
-├── src/
-│   ├── icon.png
-│   ├── index.html
-│   ├── main.js
-│   ├── preload.js
-│   ├── renderer.js
-│   └── styles.css
-├── .gitignore
-├── package.json
-└── README.md
-```
-
-## 🔐 Privacidad
-
-La aplicación está planteada como una herramienta de escritorio. El historial y las preferencias que gestiona la aplicación se almacenan localmente según su implementación. No requiere una cuenta propia dentro de la aplicación para sus funciones principales.
-
-## 📜 Licencia
-
-Este repositorio debe incluir un archivo de licencia si deseas distribuir el proyecto bajo una licencia concreta. Si todavía no has elegido una, puedes añadirla posteriormente desde GitHub.
+### ¿La aplicación se actualiza?
+Sí. El sistema de actualización permite recibir nuevas versiones publicadas de la aplicación.
 
 ---
 
 <p align="center">
   <strong>Descargador Videos Online YT</strong><br>
-  Una herramienta de escritorio para gestionar descargas multimedia de forma sencilla.
+  Simple, rápido y práctico.
 </p>
 
 <p align="center">
-  <a href="https://github.com/bryanlopezvr/Descargador-Online-Youtube">Ver repositorio en GitHub</a>
+  <a href="https://github.com/bryanlopezvr/Descargador-Online-Youtube">Ver proyecto en GitHub</a>
 </p>
