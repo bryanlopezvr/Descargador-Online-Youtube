@@ -1,0 +1,22 @@
+const {contextBridge,ipcRenderer}=require("electron");
+contextBridge.exposeInMainWorld("desktopAPI",{
+  chooseFolder:()=>ipcRenderer.invoke("choose-folder"),
+  openFolder:f=>ipcRenderer.invoke("open-folder",f),
+  getInfo:u=>ipcRenderer.invoke("info",u),
+  download:o=>ipcRenderer.invoke("download",o),
+  onProgress:cb=>ipcRenderer.on("download-progress",(_,p)=>cb(p)),
+  getYtDlpVersion:()=>ipcRenderer.invoke("ytdlp-version"),
+  updateYtDlp:force=>ipcRenderer.invoke("ytdlp-update",{force}),
+  onYtDlpAutoUpdated:cb=>ipcRenderer.on("ytdlp-auto-updated",(_,version)=>cb(version)),
+  onPrefillUrl:cb=>ipcRenderer.on("prefill-url",(_,url)=>cb(url)),
+  getPlaylistInfo:u=>ipcRenderer.invoke("playlist-info",u),
+  cancelDownload:jobId=>ipcRenderer.invoke("cancel-download",jobId),
+  checkAppUpdate:()=>ipcRenderer.invoke("check-app-update"),
+  installAppUpdate:()=>ipcRenderer.invoke("install-app-update"),
+  onAppUpdateStatus:cb=>ipcRenderer.on("app-update-status",(_,s)=>cb(s)),
+  winMinimize:()=>ipcRenderer.send("win-minimize"),
+  winMaximizeToggle:()=>ipcRenderer.send("win-maximize-toggle"),
+  winClose:()=>ipcRenderer.send("win-close"),
+  winIsMaximized:()=>ipcRenderer.invoke("win-is-maximized"),
+  onWinMaximizedState:cb=>ipcRenderer.on("win-maximized-state",(_,isMax)=>cb(isMax))
+});

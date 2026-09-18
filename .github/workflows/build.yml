@@ -1,0 +1,32 @@
+name: Build y publicar EXE
+
+# Se dispara cuando subes un tag con formato v1.0.0, v2.1.0, etc.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  # También se puede lanzar a mano desde la pestaña "Actions" de GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar y publicar en GitHub Releases
+        run: npm run dist -- --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

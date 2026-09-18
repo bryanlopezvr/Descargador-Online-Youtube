@@ -1,0 +1,49 @@
+{
+  "name": "descargador-videos-online-yt",
+  "version": "2.1.0",
+  "description": "Descargador Videos Online YT para Windows",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "yt-dlp-wrap": "^2.3.12",
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^38.1.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.descargadorvideosonline.yt",
+    "productName": "Descargador Videos Online YT",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**"
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "bryanlopezvr",
+        "repo": "Descargador-Online-Youtube"
+      }
+    ]
+  }
+}

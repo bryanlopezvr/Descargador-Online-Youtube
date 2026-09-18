@@ -1,0 +1,16 @@
+# Dependencias
+node_modules/
+
+# Salida de electron-builder (el .exe se genera aquí, no se sube a git)
+dist/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Entorno / secretos
+.env

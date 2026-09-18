@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Descargador Videos Online YT</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <div id="titlebar" class="titlebar">
+    <div class="titlebar-drag"></div>
+
+    <div class="titlebar-controls">
+      <button id="settingsBtn" class="settings-btn" title="Configuración">⚙</button>
+
+      <div class="win-controls">
+        <button id="winMinimize" class="win-btn" title="Minimizar" aria-label="Minimizar">
+          <svg class="icon-minimize" viewBox="0 0 10 10"><rect x="0" y="4.5" width="10" height="1"></rect></svg>
+        </button>
+        <button id="winMaximize" class="win-btn" title="Maximizar" aria-label="Maximizar">
+          <svg class="icon-maximize" viewBox="0 0 10 10"><rect x="0.5" y="0.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1"></rect></svg>
+          <svg class="icon-restore" viewBox="0 0 10 10">
+            <rect x="2.5" y="0.5" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1"></rect>
+            <rect x="0.5" y="2.5" width="7" height="7" fill="var(--surface,#12151c)" stroke="currentColor" stroke-width="1"></rect>
+          </svg>
+        </button>
+        <button id="winClose" class="win-btn win-btn-close" title="Cerrar" aria-label="Cerrar">
+          <svg viewBox="0 0 10 10"><line x1="0" y1="0" x2="10" y2="10" stroke="currentColor" stroke-width="1"></line><line x1="10" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="1"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="settingsPanel" class="settings-panel hidden">
+      <div class="settings-section">
+        <h4 id="languageLabelText">Idioma</h4>
+        <div class="segmented">
+          <button id="langEs" class="active">Español</button>
+          <button id="langEn">English</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h4 id="themeLabelText">Tema</h4>
+        <div class="segmented">
+          <button id="themeOriginal" class="active">Original</button>
+          <button id="themeLight">Blanco</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h4 id="updatesLabelText">Actualizaciones</h4>
+        <p id="ytdlpVersion" class="settings-folder-path">—</p>
+        <div class="settings-row">
+          <button id="updateYtDlp" class="ghost-btn">Actualizar ahora</button>
+        </div>
+        <p id="updateStatus" class="settings-status"></p>
+      </div>
+
+      <div class="settings-section">
+        <h4 id="appUpdateLabelText">Actualización de la app</h4>
+        <div class="settings-row">
+          <button id="checkAppUpdate" class="ghost-btn">Buscar actualización</button>
+          <button id="installAppUpdate" class="secondary hidden">Reiniciar e instalar</button>
+        </div>
+        <p id="appUpdateStatus" class="settings-status"></p>
+      </div>
+
+      <div class="settings-section">
+        <h4 id="helpLabelText">Ayuda</h4>
+        <div class="settings-row">
+          <button id="helpSmartscreen" class="ghost-btn">¿Windows bloqueó la app?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="card hero">
+      <div class="url-box">
+        <span class="url-icon">🔗</span>
+        <input id="url" placeholder="Pega aquí el enlace de YouTube..." autocomplete="off">
+        <button id="paste" class="ghost-btn">Pegar</button>
+      </div>
+      <button id="playlistBtn" class="ghost-btn playlist-btn hidden">📃 Ver playlist</button>
+
+      <button id="analyze" class="primary">Analizar video</button>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section id="result" class="card result hidden">
+      <div class="thumb">
+        <div id="ph">▶</div>
+        <img id="thumbnail" alt="">
+      </div>
+
+      <div class="details">
+        <h3 id="title">—</h3>
+        <div class="meta">
+          <span id="duration">Duración —</span>
+          <span class="dot">•</span>
+          <span id="channel">Canal —</span>
+        </div>
+
+        <button id="download" class="download">↓ Descargar</button>
+      </div>
+    </section>
+
+    <section id="queueSection" class="card queue hidden">
+      <div class="queue-toolbar-top">
+        <span id="autoBestHintText" class="queue-hint">
+          Elegir <b>mejor calidad</b>, luego <b>Descargar</b> y guardar en
+          <button id="queueFolderBtn" class="link-btn">C:\Files</button>
+        </span>
+        <label class="switch" title="Descarga automática con la mejor calidad">
+          <input type="checkbox" id="autoBest" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <h3 id="queueTitle" class="visually-hidden">Cola de descargas</h3>
+      <div id="queueList" class="queue-list"></div>
+
+      <div class="queue-toolbar-bottom">
+        <button id="queueOptionsBtn" class="ghost-btn">⚙ <span id="queueOptionsText">Opciones</span></button>
+        <span id="queueSpeedText" class="queue-speed">—</span>
+        <button id="queuePauseAllBtn" class="ghost-btn">Pausar todos</button>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div id="modalIcon" class="modal-icon">✓</div>
+      <h3 id="modalTitle">Descarga completada</h3>
+      <p id="modalText">Tu archivo se guardó correctamente.</p>
+      <div class="modal-actions">
+        <button id="modalOpen" class="modal-btn modal-btn-primary">Abrir</button>
+        <button id="modalClose" class="modal-btn modal-btn-secondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="smartscreenOverlay" class="modal-overlay hidden">
+    <div class="modal-card smartscreen-card">
+      <div class="modal-icon">🛡</div>
+      <h3 id="smartscreenTitle">Windows protegió tu PC</h3>
+      <p id="smartscreenText" class="smartscreen-text"></p>
+      <div class="modal-actions">
+        <button id="smartscreenClose" class="modal-btn modal-btn-primary">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="downloadOptionsOverlay" class="modal-overlay hidden">
+    <div class="modal-card download-options-card">
+      <div class="do-header">
+        <div class="do-thumb"><img id="doThumb" alt=""></div>
+        <div class="do-headtext">
+          <h3 id="doTitle">—</h3>
+          <span id="doDuration">00:00</span>
+        </div>
+      </div>
+
+      <div class="do-section">
+        <h4><span class="do-step">1.</span> <span id="doQualityStepText">Elige la calidad</span></h4>
+        <div id="doQualityList" class="do-quality-list"></div>
+      </div>
+
+      <div class="do-section">
+        <h4><span class="do-step">2.</span> <span id="doActionStepText">Elige la acción</span></h4>
+        <div class="do-actions-list">
+          <label class="do-radio">
+            <input type="radio" name="doAction" value="download" checked>
+            <span id="doActionDownloadText">Solo descargar (MP4)</span>
+          </label>
+          <label class="do-radio">
+            <input type="radio" name="doAction" value="mp3">
+            <span id="doActionMp3Text">Convertir a MP3</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="do-savepath">
+        <span id="doSaveLabelText">Guardar en</span>
+        <div class="do-savepath-row">
+          <span id="doSavePath" class="do-savepath-text">—</span>
+          <button id="doChangeFolder" class="ghost-btn">Cambiar</button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="doConfirm" class="modal-btn modal-btn-primary" >Descargar y convertir</button>
+        <button id="doClose" class="modal-btn modal-btn-secondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="playlistOverlay" class="modal-overlay hidden">
+    <div class="modal-card playlist-card">
+      <h3 id="playlistModalTitle">Playlist</h3>
+      <p id="playlistModalCount" class="settings-status"></p>
+
+      <div class="options">
+        <label>
+          <span id="playlistFormatLabelText" class="opt-label">Formato</span>
+          <select id="playlistFormat">
+            <option value="mp4">MP4 — Video</option>
+            <option value="mp3">MP3 — Audio</option>
+          </select>
+        </label>
+        <label id="playlistQualityWrap">
+          <span id="playlistQualityLabelText" class="opt-label">Calidad</span>
+          <select id="playlistQuality">
+            <option value="2160">2160p 4K</option>
+            <option value="1440">1440p HD</option>
+            <option value="1080" selected>1080p HD</option>
+            <option value="720">720p</option>
+            <option value="480">480p</option>
+            <option value="360">360p</option>
+            <option value="240">240p</option>
+            <option value="144">144p</option>
+          </select>
+        </label>
+        <label id="playlistBitrateWrap" class="hidden">
+          <span id="playlistAudioLabelText" class="opt-label">Audio</span>
+          <select id="playlistBitrate">
+            <option value="320">320 kbps</option>
+            <option value="256">256 kbps</option>
+            <option value="192">192 kbps</option>
+            <option value="128">128 kbps</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="settings-row">
+        <button id="playlistSelectAll" class="ghost-btn">Seleccionar todos</button>
+      </div>
+
+      <div id="playlistItems" class="playlist-items"></div>
+
+      <div class="modal-actions">
+        <button id="playlistAdd" class="modal-btn modal-btn-primary">Agregar a la cola</button>
+        <button id="playlistClose" class="modal-btn modal-btn-secondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="historyOverlay" class="modal-overlay hidden">
+    <div class="modal-card history-card">
+      <h3 id="historyTitle">Historial</h3>
+      <div id="historyList" class="history-list"></div>
+      <div class="modal-actions">
+        <button id="historyClose" class="modal-btn modal-btn-secondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="renderer.js"></script>
+</body>
+</html>
